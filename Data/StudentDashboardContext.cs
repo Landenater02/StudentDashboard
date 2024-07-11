@@ -15,5 +15,6 @@ namespace StudentDashboard.Data
         }
 
         public DbSet<StudentDashboard.Models.student> student { get; set; } = default!;
+        public DbSet<StudentDashboard.Models.Visits> Visits { get; set; } = default!;
     }
 }
