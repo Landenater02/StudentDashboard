@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StudentDashboard.Data;
+using StudentDashboard.Controllers;
 namespace StudentDashboard
 {
     public class Program
@@ -14,6 +15,10 @@ namespace StudentDashboard
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+                        builder.Services.AddEndpointsApiExplorer();
+
+                        builder.Services.AddSwaggerGen();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -23,6 +28,12 @@ namespace StudentDashboard
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+                        if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+};
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -34,6 +45,10 @@ namespace StudentDashboard
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                        app.MapVisitsEndpoints();
+
+                        app.MapstudentEndpoints();
 
             app.Run();
         }
