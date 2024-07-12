@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom/client';
 
-const App = () => {
+
+
+const Visits = () => {
     const [visits, setVisits] = useState([]);
 
     useEffect(() => {
@@ -24,4 +27,11 @@ const App = () => {
     );
 };
 
-export default App;
+export default Visits;
+// React DOM rendering
+const VisitsTable = ReactDOM.createRoot(document.getElementById('VisitsTable'));
+VisitsTable.render(
+    <React.StrictMode>
+        <Visits />
+    </React.StrictMode>
+);

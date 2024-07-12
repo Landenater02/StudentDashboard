@@ -1,31 +1,35 @@
 ﻿const path = require('path');
-  module.exports = {
+
+module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: {
+        visits: './React Components/visitsComponent.js',
+        visitsEdit: './React Components/visitsEditComponent.js'
+    },
     output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js', // This will generate visits.js and visitsEdit.js
     },
     module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-          },
-        },
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
-        },
-      ],
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                },
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+        ],
     },
     resolve: {
-      extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx'],
     },
     externals: {
-      react: 'React', 
-      'react-dom': 'ReactDOM', 
+        react: 'React',
+        'react-dom': 'ReactDOM',
     },
-  };
+};
