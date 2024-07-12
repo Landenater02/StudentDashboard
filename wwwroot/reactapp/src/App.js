@@ -1,25 +1,27 @@
+import React, { useEffect, useState } from 'react';
 
-import './App.css';
+const App = () => {
+    const [visits, setVisits] = useState([]);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    useEffect(() => {
+        fetch('/api/visits')
+            .then(response => response.json())
+            .then(data => setVisits(data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
+    return (
+        <div>
+            <h1>Visits</h1>
+            <ul>
+                {visits.map(visit => (
+                    <li key={visit.id}>
+                        {visit.advisor} met with {visit.student} on {new Date(visit.date).toLocaleDateString()}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
 
 export default App;
